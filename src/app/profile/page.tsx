@@ -15,20 +15,16 @@ import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarInitials } from "@/components/ui/avatar";
 import { LogOut, Moon, Sun, User, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 
 export default function ProfilePage() {
   const { user, logout } = useAuthStore();
   const { theme, setTheme } = useTheme();
   const router = useRouter();
-  const { toast } = useToast();
 
   const handleLogout = () => {
     logout();
-    toast({
-      title: "Logged out successfully",
-      description: "See you next time!",
-    });
+    toast.success("Logged out successfully");
     router.push("/");
   };
 

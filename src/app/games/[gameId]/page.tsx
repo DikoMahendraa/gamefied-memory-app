@@ -9,12 +9,11 @@ import GameTimer from "@/components/game/game-timer";
 import GameProgress from "@/components/game/game-progress";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 
 export default function GamePage() {
   const params = useParams();
   const router = useRouter();
-  const { toast } = useToast();
   const { startGame, submitAnswer, completeGame } = useGameStore();
 
   const gameId = params.gameId as string;
@@ -73,10 +72,7 @@ export default function GamePage() {
       const score = calculateScore(newAnswers);
       completeGame(score, newAnswers);
 
-      toast({
-        title: "Game Completed!",
-        description: `You scored ${score}%`,
-      });
+      toast.success("Game Completed!");
 
       router.push(`/games/${gameId}/results`);
     }
